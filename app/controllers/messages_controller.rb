@@ -4,7 +4,9 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.create! text: params[:message][:text]
+    @translated_text = MessageTranslator.new(params[:message][:text]).translate
+
+    @message = Message.create!(text: @translated_text)
     ActionCable.server.broadcast(
       'chat Chat Room',
       message: MessagesController.render(
