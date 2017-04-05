@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.create! text: params[:message][:text]
     ActionCable.server.broadcast(
-      'chat Best Room',
+      'chat Chat Room',
       message: MessagesController.render(
         partial: 'messages/message',
         locals: { message: @message }
