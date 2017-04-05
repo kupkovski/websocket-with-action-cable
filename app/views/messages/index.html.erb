@@ -1,0 +1,11 @@
+<h1>Messages</h1>
+
+<div id="messages" data-chat-room="Best Room">
+  <%- @messages.each do |message| %>
+    <p>
+      <%= message.text %>
+    </p>
+  <% end %>
+</div>
+
+<%= render 'messages/form' %>
