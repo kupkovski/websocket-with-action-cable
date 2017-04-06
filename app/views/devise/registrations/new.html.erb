@@ -26,6 +26,12 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :dialect %><br />
+    <%#= select_tag(:dialect, options_from_collection_for_select(User::DIALECT_VALUES, 'to_s', 'to_s')) %>
+    <%= f.select :dialect, options_for_select(User.dialects.map {|k, v| [k, k]}) %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

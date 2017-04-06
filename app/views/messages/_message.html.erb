@@ -1,4 +1,5 @@
 <article data-user-id="<%= message.id %>">
-  <p><%= message.text %></p>
+  <p>message: <%= MessageTranslator.new(message.text, current_user.dialect).translate %></p>
   <p>name: <%= message.user.name %></p>
+  <p>dialect: <%= current_user.dialect %></p>
 </article>
