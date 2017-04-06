@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang='eng'>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
     <title>Chat</title>
     <%= csrf_meta_tags %>
 
@@ -10,16 +13,20 @@
 
   <body>
     <% if notice.present? %>
-      <p class="notice"><%= notice %></p>
+      <div class="alert alert-success"><%= notice %></div>
     <% end %>
     <% if alert.present? %>
-      <p class="alert"><%= alert %></p>
+      <div class="alert alert-danger"><%= alert %></div>
     <% end %>
 
     <% if current_user.present? %>
-      <header class="page-header navbar navbar-static-top">
-         <%= link_to 'Logout', destroy_user_session_path, method: :DELETE %>
-      </header>
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <ul class="nav navbar-nav">
+          <li class="ative">
+            <%= link_to 'Logout', destroy_user_session_path, method: :DELETE %>
+          </li>
+        </ul>
+      </div>
     <% end %>
     <div class="container">
       <%= yield %>
