@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang='eng'>
   <head>
     <title>Chat</title>
     <%= csrf_meta_tags %>
@@ -9,8 +9,20 @@
   </head>
 
   <body>
-   <p class="notice"><%= notice %></p>
-   <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <% if notice.present? %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+
+    <% if current_user.present? %>
+      <header class="page-header navbar navbar-static-top">
+         <%= link_to 'Logout', destroy_user_session_path, method: :DELETE %>
+      </header>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
