@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @translated_text = MessageTranslator.new(params[:message][:text]).translate
+    @translated_text = MessageTranslator.new(params[:message][:text], :yoda).translate
 
     @message = Message.create!(text: @translated_text)
     ActionCable.server.broadcast(

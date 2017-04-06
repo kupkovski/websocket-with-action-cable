@@ -1,35 +1,42 @@
 require 'uri'
 class MessageTranslator
 
-  attr_reader :message, :language
+  attr_reader :message, :dialect
 
   BASE_URL = 'http://www.degraeve.com/cgi-bin/babel.cgi'.freeze
 
-  def initialize(message)
+  def initialize(message, dialect)
     @message = message
-    @language = 'yoda'
+    @dialect = dialect
   end
 
   def translate
-    doc = generate_nokogiri_doc(full_url)
-    gather_result(doc).delete("\n").strip
+    parse_response(document)
   end
 
   private
 
+  def parse_response(doc)
+    gather_result(doc).delete("\n").strip
+  end
+
   def gather_result(doc)
-    doc.xpath('//table//blockquote//p').first.text.to_s
+    doc.xpath('//table//blockquote//p').first&.text.to_s
   end
 
   def full_url
-    "#{BASE_URL}?d=#{language}&w=#{encoded_message}"
+    "#{BASE_URL}?d=#{dialect}&w=#{encoded_message}"
   end
 
   def encoded_message
     URI.encode_www_form_component(message)
   end
 
-  def generate_nokogiri_doc(url)
-    @doc ||= Nokogiri::HTML(open(url))
+  def document
+    @doc ||= Nokogiri::HTML(external_content)
+  end
+
+  def external_content
+    open(full_url)
   end
 end
