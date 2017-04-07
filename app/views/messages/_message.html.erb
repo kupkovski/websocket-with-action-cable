@@ -1,5 +1,9 @@
-<article data-user-id="<%= message.id %>">
-  <p>message: <%= MessageTranslator.new(message.text, current_user.dialect).translate %></p>
-  <p>name: <%= message.user.name %></p>
-  <p>dialect: <%= current_user.dialect %></p>
-</article>
+<div data-user-id="<%= message.id %>" class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">Sent by: <%= message.user.name %></div>
+  </div>
+  <div class="panel-body">
+    Message ( <%= show_message_dialect_icon(current_user.dialect) %> ): <%= MessageTranslator.new(message.text, current_user.dialect).translate %>
+  </div>
+  <div class="panel-footer">Sent at: <%= l(message.created_at, format: :short) %></div>
+</div>

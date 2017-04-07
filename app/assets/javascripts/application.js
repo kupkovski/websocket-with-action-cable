@@ -11,7 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require tether.min.js
 //= require bootstrap-sprockets
+//= require bootstrap
 //= require jquery_ujs
 //= require turbolinks
 //= require ./cable

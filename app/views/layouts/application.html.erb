@@ -19,16 +19,16 @@
       <div class="alert alert-danger"><%= alert %></div>
     <% end %>
 
-    <% if current_user.present? %>
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <ul class="nav navbar-nav">
-          <li class="ative">
-            <%= link_to 'Logout', destroy_user_session_path, method: :DELETE %>
-          </li>
-        </ul>
-      </div>
-    <% end %>
     <div class="container">
+      <% if current_user.present? %>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <ul class="nav navbar-nav">
+            <li class="ative">
+              <%= link_to 'Logout', destroy_user_session_path, method: :DELETE %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>
